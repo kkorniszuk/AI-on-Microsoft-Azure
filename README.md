@@ -1,14 +1,6 @@
 # Evaluate text with Azure Cognitive Language Services
 # 1. Wstęp
+Serwisy służące do analizowania tekstu, określania zamiarów, wykrywania motywów dla dorosłych i przetwarzania danych wejściowych w języku naturalnym.
 # 2. Użycie
-# 3. 
-# AI-on-Microsoft-Azure
-Microsoft Azure AI PW 
-Intro
-Przedstawienie serwisu
-Co to za serwis? Co robi?
-Use cases
-w jakich przypadkach powinniśmy użyć tego serwisu - kreatywnie wasze pomysły
-How to
-Jak użyć tego serwisu?
-Pricing - ile się za niego płaci
+# 3. Implementacja
+# 4. Koszty
