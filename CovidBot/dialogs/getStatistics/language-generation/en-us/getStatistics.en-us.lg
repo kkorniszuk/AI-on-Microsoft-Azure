@@ -1,0 +1,27 @@
+[import](common.lg)
+
+# SendActivity_p7qgbX()
+- From what country do you want to get statistics?
+# TextInput_Prompt_XrdHtC()
+[Activity
+    Text = Enter your country
+    SuggestedActions = help | cancel
+]
+# TextInput_UnrecognizedPrompt_XrdHtC()
+- Sorry the value '${this.value}' doesn't appear to be a valid entry. Please enter a valid country name in english.
+# TextInput_InvalidPrompt_XrdHtC()
+- Sorry, '${this.value}' seems to not be a valid country name. 
+# SendActivity_OQ3K8H()
+ - I got an error: ${dialog.confirmed_result.content.message}
+
+
+# SendActivity_eg8a2u()
+ - I got an error: ${dialog.recovered_result.content.message}
+# SendActivity_Eo0HhE()
+ - I got an error: ${dialog.deaths_result.content.message}
+# SendActivity_vOOztC()
+[ThumbnailCard
+    title = Statistics for ${dialog.country_name}
+    text = Total cases: ${dialog.confirmed_cases}, total deaths: ${dialog.death_cases}, total recovers: ${dialog.recovered_cases}
+    SuggestedActions = help | cancel
+]

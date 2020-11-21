@@ -1,0 +1,184 @@
+{
+  "$kind": "Microsoft.AdaptiveDialog",
+  "$designer": {
+    "id": "GeqiAv",
+    "name": "getStatistics",
+    "description": ""
+  },
+  "autoEndDialog": true,
+  "defaultResultProperty": "dialog.result",
+  "triggers": [
+    {
+      "$kind": "Microsoft.OnBeginDialog",
+      "$designer": {
+        "name": "BeginDialog",
+        "description": "",
+        "id": "taYjl9"
+      },
+      "actions": [
+        {
+          "$kind": "Microsoft.SendActivity",
+          "$designer": {
+            "id": "p7qgbX"
+          },
+          "activity": "${SendActivity_p7qgbX()}"
+        },
+        {
+          "$kind": "Microsoft.TextInput",
+          "$designer": {
+            "id": "XrdHtC"
+          },
+          "disabled": false,
+          "maxTurnCount": 3,
+          "alwaysPrompt": false,
+          "allowInterruptions": true,
+          "prompt": "${TextInput_Prompt_XrdHtC()}",
+          "unrecognizedPrompt": "${TextInput_UnrecognizedPrompt_XrdHtC()}",
+          "defaultValueResponse": "",
+          "property": "dialog.country",
+          "outputFormat": "=trim(this.value)",
+          "invalidPrompt": "${TextInput_InvalidPrompt_XrdHtC()}",
+          "defaultValue": "Poland"
+        },
+        {
+          "$kind": "Microsoft.HttpRequest",
+          "$designer": {
+            "id": "5l8V1p"
+          },
+          "method": "GET",
+          "url": "https://api.covid19api.com/dayone/country/${dialog.country}/status/confirmed/live",
+          "resultProperty": "dialog.confirmed_result"
+        },
+        {
+          "$kind": "Microsoft.IfCondition",
+          "$designer": {
+            "id": "uzteet"
+          },
+          "elseActions": [
+            {
+              "$kind": "Microsoft.SendActivity",
+              "$designer": {
+                "id": "OQ3K8H"
+              },
+              "activity": "${SendActivity_OQ3K8H()}"
+            },
+            {
+              "$kind": "Microsoft.DeleteProperty",
+              "$designer": {
+                "id": "9XnXdO"
+              },
+              "property": "dialog.country"
+            }
+          ],
+          "condition": "dialog.confirmed_result.statusCode == 200"
+        },
+        {
+          "$kind": "Microsoft.HttpRequest",
+          "$designer": {
+            "id": "LTZblu"
+          },
+          "url": "https://api.covid19api.com/dayone/country/${dialog.country}/status/recovered/live",
+          "method": "GET",
+          "resultProperty": "dialog.recovered_result"
+        },
+        {
+          "$kind": "Microsoft.IfCondition",
+          "$designer": {
+            "id": "YfUQ3O"
+          },
+          "elseActions": [
+            {
+              "$kind": "Microsoft.SendActivity",
+              "$designer": {
+                "id": "eg8a2u"
+              },
+              "activity": "${SendActivity_eg8a2u()}"
+            },
+            {
+              "$kind": "Microsoft.DeleteProperty",
+              "$designer": {
+                "id": "KeshVz"
+              },
+              "property": "dialog.country"
+            }
+          ],
+          "condition": "dialog.recovered_result.statusCode == 200"
+        },
+        {
+          "$kind": "Microsoft.HttpRequest",
+          "$designer": {
+            "id": "lNlTJL"
+          },
+          "method": "GET",
+          "url": "https://api.covid19api.com/dayone/country/${dialog.country}/status/deaths/live",
+          "resultProperty": "dialog.deaths_result"
+        },
+        {
+          "$kind": "Microsoft.IfCondition",
+          "$designer": {
+            "id": "7B10vU"
+          },
+          "elseActions": [
+            {
+              "$kind": "Microsoft.SendActivity",
+              "$designer": {
+                "id": "Eo0HhE"
+              },
+              "activity": "${SendActivity_Eo0HhE()}"
+            },
+            {
+              "$kind": "Microsoft.DeleteProperty",
+              "$designer": {
+                "id": "MQGjTX"
+              },
+              "property": "dialog.country"
+            }
+          ],
+          "condition": "dialog.deaths_result.statusCode == 200"
+        },
+        {
+          "$kind": "Microsoft.SetProperty",
+          "$designer": {
+            "id": "SyYBpD"
+          },
+          "property": "dialog.confirmed_cases",
+          "value": "=dialog.confirmed_result.content[int(dialog.confirmed_result.content.Count) - 1].Cases"
+        },
+        {
+          "$kind": "Microsoft.SetProperty",
+          "$designer": {
+            "id": "s3Qhmy"
+          },
+          "property": "dialog.recovered_cases",
+          "value": "=dialog.recovered_result.content[int(dialog.recovered_result.content.Count) - 1].Cases"
+        },
+        {
+          "$kind": "Microsoft.SetProperty",
+          "$designer": {
+            "id": "kOoiov"
+          },
+          "property": "dialog.death_cases",
+          "value": "=dialog.deaths_result.content[int(dialog.deaths_result.content.Count) - 1].Cases"
+        },
+        {
+          "$kind": "Microsoft.SetProperty",
+          "$designer": {
+            "id": "2LMZ23"
+          },
+          "property": "dialog.country_name",
+          "value": "=toUpper(dialog.country)"
+        },
+        {
+          "$kind": "Microsoft.SendActivity",
+          "$designer": {
+            "id": "vOOztC"
+          },
+          "activity": "${SendActivity_vOOztC()}"
+        }
+      ]
+    }
+  ],
+  "generator": "getStatistics.lg",
+  "recognizer": "getStatistics.lu.qna",
+  "id": "getStatistics"
+}
