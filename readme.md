@@ -7,3 +7,4 @@ Mimo to stworzyłem prosty model, który całkiem dobrze radzi sobie z wykrywani
 Kolejną funkcjonalnością jest odczyt aktualnych statystyk covida dla danego kraju. Bot informuje nas wtedy ile do tej pory było przypadków zachorowań, śmierci i uzdrowień. Poza tym bot ma też kilka mniejszycj featerów, takich jak zakończenie aktualnego wątku.
 ## 3. Kod i uruchomienie
 Bota udostępniłem jako projekt z Bot Framework Composera. Jest w repozytorium w folderze CovidBot. Lokalne uruchomienie wymaga Composera i Emulatora. Po sklonowaniu repozytorium otwieramy go jako projekt w Composerze. 
+Link do video: https://www.youtube.com/watch?v=4VMYV3RtRGw&feature=youtu.be
